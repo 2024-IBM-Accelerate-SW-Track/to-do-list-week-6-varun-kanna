@@ -64,6 +64,10 @@ async function getItems(request, response) {
 app.get('/get/searchitem', searchItems);
 async function searchItems(request, response) {
 	//begin here
+	var searchField = request.query.taskname;
+	var json = JSON.parse(await fsPromises.readFile('database.json'));
+	var returnData = json.filter((jsonData) => jsonData.Task === searchField);
+	return response.json(returnData);
 }
 
 // Add initDB function here
